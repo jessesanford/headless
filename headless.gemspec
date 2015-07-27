@@ -3,7 +3,7 @@ spec = Gem::Specification.new do |s|
   s.email = 'leonid@shevtsov.me'
 
   s.name = 'headless'
-  s.version = '2.1.0'
+  s.version = '2.2.0-pre'
   s.summary = 'Ruby headless display interface'
 
   s.description = <<-EOF
@@ -12,7 +12,7 @@ spec = Gem::Specification.new do |s|
   s.requirements = 'Xvfb'
   s.homepage = 'http://leonid.shevtsov.me/en/headless'
 
-  s.files         = `git ls-files`.split("\n")
+  s.files = `git ls-files`.split("\n")
 
   s.add_development_dependency 'rake'
   s.add_development_dependency "rspec", "~> 3"
