@@ -3,7 +3,7 @@ class Headless
     def self.application_exists?(app)
       `which #{app}`.strip != ""
     end
-    
+
     def self.ensure_application_exists!(app, error_message)
       if !self.application_exists?(app)
         raise Headless::Exception.new(error_message)
@@ -36,7 +36,6 @@ class Headless
         exec command
         exit! 127 # safeguard in case exec fails
       end
-      Process.detach(pid)
 
       File.open pid_filename, 'w' do |f|
         f.puts pid
@@ -54,11 +53,13 @@ class Headless
           # Process.wait tried to wait on a dead process
         end
       end
-      
-      begin
-        FileUtils.rm pid_filename
-      rescue Errno::ENOENT
-        # pid file already removed
+
+      unless options[:preserve_pid_file]
+        begin
+          FileUtils.rm pid_filename
+        rescue Errno::ENOENT
+          # pid file already removed
+        end
       end
     end
   end
